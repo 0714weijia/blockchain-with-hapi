@@ -35,12 +35,12 @@ server.route([
                 let body = encodeURIComponent(request.payload.body);
                 addBlock(body, function(err, block) {
                 });
-                return body;
+                return JSON.stringify(request.payload).toString();
             },
             validate: {
                 payload: {
                     body: Joi.string().min(1).required()
-                }                                   
+                }
             }
         }
     },
