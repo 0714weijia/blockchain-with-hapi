@@ -33,8 +33,7 @@ server.route([
         config: {
             handler: function (request, h) {
                 let body = encodeURIComponent(request.payload.body);
-                addBlock(body, function(err, block) {
-                });
+                addBlock(body);
                 return JSON.stringify(request.payload).toString();
             },
             validate: {
@@ -57,7 +56,7 @@ async function getBlock(blockHeight) {
     let blockchain = new Blockchain();
     try {
         let block = await blockchain.getBlock(blockHeight);
-        return block;
+        return decodeURIComponent(block);
     }
     catch (err) {
         let height = await blockchain.getBlockHeight();
